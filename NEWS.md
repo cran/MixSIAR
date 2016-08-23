@@ -1,3 +1,16 @@
+MixSIAR 3.1.7 (2016-08-15)
+=========================
+
+## MINOR IMPROVEMENTS
+
+* Changed resid.prop prior from dchisqr(3) to dunif(0,20)
+
+## VERY MINOR IMPROVEMENTS
+
+* Updated install instructions in README (install.packages)
+* Fixed error in Cladocera vignette (process vs. resid error)
+* Fixed link to manual to CRAN page (DESCRIPTION file)
+
 MixSIAR 3.1.6 (2016-06-24)
 =========================
 
