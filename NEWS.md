@@ -1,3 +1,49 @@
+MixSIAR 3.1.9
+=========================
+
+Nothing changed, just trying to get new Zenodo DOI (3.1.8 failed)
+
+MixSIAR 3.1.8
+=========================
+
+## MINOR IMPROVEMENTS
+
+* updated manual
+* new example: alligator diet, model comparison table with LOO/WAIC weights
+* new example: mantis shrimp diet, informative priors + combining sources
+* new function 'compare_models' to perform model selection based on LOO/WAIC weights, via 'loo' package
+* new function 'combine_sources' to aggregate sources a posteriori
+* new function 'summary_stat' to print summary of posterior after combining sources
+* new function 'plot_intervals' to plot CI of posterior after combining sources
+
+MixSIAR 3.1.7.9001
+=========================
+
+## MINOR IMPROVEMENTS
+
+* Removed `attach.jags` call (now directly use `jags.1$BUGSoutput$sims.list`)
+* Added epsilon (multiplicative error term) estimates to output (summary stats, posterior plots)
+
+## BUG FIX
+
+* Fixed bug #129 by using `MCMCpack::rdirichlet` instead of `compositions::rDirichlet.rcomp`
+* Small changes to pass R CMD check
+
+MixSIAR 3.1.7.9000
+=========================
+
+## MINOR IMPROVEMENTS
+
+* Improved continuous effect output plots: 1) added 95% CI shading, 2) plot each level of fixed effect
+* Fixed bug with 1FE + 1RE: empty levels Heidelberger diagnostic (#100)
+* Fixed bug with 1FE + 1RE: posterior density plots saved over themselves
+* Added return value for output_JAGS function: now returns p.both if 1FE + 1RE
+
+## VERY MINOR IMPROVEMENTS
+
+* Added check/error message: if sources by factor, sources must match for all factor levels
+* Updated CITATION and manual
+
 MixSIAR 3.1.7 (2016-08-15)
 =========================
 

@@ -2,7 +2,7 @@ MixSIAR
 =============
 [![cran version](http://www.r-pkg.org/badges/version/MixSIAR)](https://cran.r-project.org/package=MixSIAR)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/grand-total/MixSIAR?)](https://github.com/metacran/cranlogs.app)
-[![DOI](https://zenodo.org/badge/20929/brianstock/MixSIAR.svg)](https://zenodo.org/badge/latestdoi/20929/brianstock/MixSIAR)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1209993.svg)](https://doi.org/10.5281/zenodo.1209993)
 
 MixSIAR is an R package that helps you create and run Bayesian mixing models to analyze biotracer data (i.e. stable isotopes, fatty acids), following the MixSIAR model framework. Both graphical user interface (GUI) and script versions are available. 
 
@@ -43,7 +43,7 @@ There is a more extensive user manual included in the package install. To find t
 find.package("MixSIAR")
 ```
 
-The manual is also available from the GitHub site [here](https://github.com/brianstock/MixSIAR/blob/master/inst/mixsiar_manual_3.1_small.pdf).
+The manual is also available from the GitHub site [here](https://github.com/brianstock/MixSIAR/blob/master/inst/mixsiar_manual_small.pdf).
 
 ### FULL INSTALL (with GUI)
 
@@ -83,7 +83,7 @@ There is an extensive user manual included in the package install. To find the d
 ```
 find.package("MixSIAR")
 ```
-Alternatively, you can download the manual from the GitHub site [here](https://github.com/brianstock/MixSIAR/blob/master/inst/mixsiar_manual_3.1_small.pdf).
+Alternatively, you can download the manual from the GitHub site [here](https://github.com/brianstock/MixSIAR/blob/master/inst/mixsiar_manual_small.pdf).
 
 #### Mac OS X
 
@@ -115,7 +115,7 @@ There is an extensive user manual included in the package install. To find the d
 ```
 find.package("MixSIAR")
 ```
-Alternatively, you can download the manual from the GitHub site [here](https://github.com/brianstock/MixSIAR/blob/master/inst/mixsiar_manual_3.1_small.pdf).
+Alternatively, you can download the manual from the GitHub site [here](https://github.com/brianstock/MixSIAR/blob/master/inst/mixsiar_manual_small.pdf).
 
 #### Linux
 
@@ -146,7 +146,7 @@ There is an extensive user manual included in the package install. To find the d
 ```
 find.package("MixSIAR")
 ```
-Alternatively, you can download the manual from the GitHub site [here](https://github.com/brianstock/MixSIAR/blob/master/inst/mixsiar_manual_3.1_small.pdf).
+Alternatively, you can download the manual from the GitHub site [here](https://github.com/brianstock/MixSIAR/blob/master/inst/mixsiar_manual_small.pdf).
 
 ### FEEDBACK PLEASE!
 
@@ -156,7 +156,7 @@ This software has been improved by the questions, suggestions, and bug reports o
 
 If you use MixSIAR results in publications, please cite the MixSIAR manual as (similar to how you cite R):
 
->B. C. Stock and B. X. Semmens (2013). MixSIAR GUI User Manual. Version 3.1. https://github.com/brianstock/MixSIAR. doi:10.5281/zenodo.56159.
+>B. C. Stock and B. X. Semmens (2016). MixSIAR GUI User Manual. Version 3.1. https://github.com/brianstock/MixSIAR. doi:10.5281/zenodo.1209993.
 
 The primary citation for _Bayesian mixing models_ (MixSIR):
 
@@ -181,6 +181,10 @@ If you are using _source fitting_:
 For a detailed description of the math underlying these models, see:
 
 >Parnell, A. C., Phillips, D. L., Bearhop, S., Semmens, B. X., Ward, E. J., Moore, J. W., Jackson, A. L., Grey, J., Kelley, D. J., & Inger, R. (2013). Bayesian stable isotope mixing models. Environmetrics, 24, 387-399.
+
+For an explanation of the _error structures_ ("Process only" vs. "Resid only" vs. "Process * Resid"), see:
+
+>Stock, B. C., & Semmens, B. X. (2016). Unifying error structures in commonly used biotracer mixing ­models. Ecology, 97(10), 2562–2569.
 
 Finally... yes, a paper introducing MixSIAR is in the works and will be forthcoming shortly.
 
@@ -210,7 +214,7 @@ If for some reason you can't install using `install.packages`, the GitHub versio
 
     ```
     library(devtools)
-    devtools::install_github("brianstock/MixSIAR@*release", # gets latest release
+    devtools::install_github("brianstock/MixSIAR",
                              dependencies = TRUE, 
                              build_vignettes = TRUE) # FALSE if no pandoc/R Studio
     ```
@@ -241,7 +245,7 @@ If for some reason you can't install using `install.packages`, the GitHub versio
 
     ```
     library(devtools)
-    devtools::install_github("brianstock/MixSIAR@*release", # gets latest release
+    devtools::install_github("brianstock/MixSIAR",
                              dependencies = TRUE, 
                              build_vignettes = TRUE) # FALSE if no pandoc/R Studio
     ```
@@ -270,7 +274,7 @@ If for some reason you can't install using `install.packages`, the GitHub versio
     ```
     install.packages("devtools")
     library(devtools)
-    devtools::install_github("brianstock/MixSIAR@*release", # gets latest release
+    devtools::install_github("brianstock/MixSIAR",
                              dependencies = TRUE, 
                              build_vignettes = TRUE) # FALSE if no pandoc and pandoc-citeproc
     ```
@@ -290,3 +294,4 @@ If for some reason you can't install using `install.packages`, the GitHub versio
 [JAGS]:http://mcmc-jags.sourceforge.net/
 [Issues]:https://github.com/brianstock/MixSIAR/issues
 [SIAR Facebook group]:https://www.facebook.com/pages/SIAR-Stable-Isotope-Analysis-in-R/148501811896914
+

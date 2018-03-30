@@ -69,13 +69,13 @@ run_model <- function(run, mix, source, discr, model_filename, alpha.prior = 1, 
   if(length(alpha.prior) > 1 & length(alpha.prior) != source$n.sources) alpha = rep(1,source$n.sources) # Error checking for user inputted string/ NA
   if(length(alpha.prior) > 1 & length(alpha.prior) == source$n.sources) alpha = alpha.prior # All sources have different value inputted by user
 
-  # Cannot set informative prior on fixed effects (no p.global)
-  if(!identical(unique(alpha),1) & mix$n.fe>0){
-  stop(paste("Cannot set an informative prior with a fixed effect,
-  since there is no global/overall population. You can set an
-  informative prior on p.global with a random effect.
-  To set a prior on each level of a fixed effect you will have to
-  modify 'write_JAGS_model.R'",sep=""))}
+  # # Cannot set informative prior on fixed effects (no p.global)
+  # if(!identical(unique(alpha),1) & mix$n.fe>0){
+  # stop(paste("Cannot set an informative prior with a fixed effect,
+  # since there is no global/overall population. You can set an
+  # informative prior on p.global with a random effect.
+  # To set a prior on each level of a fixed effect you will have to
+  # modify 'write_JAGS_model.R'",sep=""))}
 
   # Set mcmc parameters
   if(is.list(run)){mcmc <- run} else { # if the user has entered custom mcmc parameters, use them
@@ -102,7 +102,7 @@ run_model <- function(run, mix, source, discr, model_filename, alpha.prior = 1, 
   cross <- array(data=NA,dim=c(N,n.sources,n.sources-1))  # dummy variable for inverse ILR calculation
   tmp.p <- array(data=NA,dim=c(N,n.sources))              # dummy variable for inverse ILR calculation
   #jags.params <- c("p.global", "ilr.global")
-  jags.params <- c("p.global")
+  jags.params <- c("p.global","loglik")
 
   # Random/Fixed Effect data (original)
   # fere <- ifelse(mix$n.effects==2 & mix$n.re < 2,TRUE,FALSE)
@@ -112,7 +112,7 @@ run_model <- function(run, mix, source, discr, model_filename, alpha.prior = 1, 
     Factor.1 <- mix$FAC[[1]]$values
     cross.fac1 <- array(data=NA,dim=c(factor1_levels,n.sources,n.sources-1))  # dummy variable for inverse ILR calculation
     tmp.p.fac1 <- array(data=NA,dim=c(factor1_levels,n.sources))              # dummy variable for inverse ILR calculation
-    if(mix$FAC[[1]]$re) jags.params <- c(jags.params, "p.fac1", "fac1.sig") else jags.params <- c(jags.params, "p.fac1")
+    if(mix$FAC[[1]]$re) jags.params <- c(jags.params, "p.fac1", "ilr.fac1", "fac1.sig") else jags.params <- c(jags.params, "p.fac1", "ilr.fac1")
     f.data <- c(f.data, "factor1_levels", "Factor.1", "cross.fac1", "tmp.p.fac1")
   }
   if(mix$n.effects > 1 & !mix$fere){
@@ -122,7 +122,7 @@ run_model <- function(run, mix, source, discr, model_filename, alpha.prior = 1, 
     if(mix$fac_nested[2]) {factor1_lookup <- mix$FAC[[2]]$lookup; f.data <- c(f.data, "factor1_lookup");}
     cross.fac2 <- array(data=NA,dim=c(factor2_levels,n.sources,n.sources-1))  # dummy variable for inverse ILR calculation
     tmp.p.fac2 <- array(data=NA,dim=c(factor2_levels,n.sources))              # dummy variable for inverse ILR calculation
-    if(mix$FAC[[2]]$re) jags.params <- c(jags.params, "p.fac2", "fac2.sig") else jags.params <- c(jags.params, "p.fac2")
+    if(mix$FAC[[2]]$re) jags.params <- c(jags.params, "p.fac2", "ilr.fac2", "fac2.sig") else jags.params <- c(jags.params, "p.fac2", "ilr.fac2")
     f.data <- c(f.data, "factor2_levels", "Factor.2", "cross.fac2", "tmp.p.fac2")
   }
 
@@ -211,7 +211,7 @@ run_model <- function(run, mix, source, discr, model_filename, alpha.prior = 1, 
   if(err=="mult") jags.params <- c(jags.params,"resid.prop")
 
   # Set initial values for p.global different for each chain
-  jags.inits <- function(){list(p.global=as.vector(compositions::rDirichlet.rcomp(1,alpha)))}
+  jags.inits <- function(){list(p.global=as.vector(MCMCpack::rdirichlet(1,alpha)))}
 
   #############################################################################
   # Call JAGS
