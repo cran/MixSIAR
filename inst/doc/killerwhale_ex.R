@@ -1,15 +1,15 @@
-## ------------------------------------------------------------------------
-library(MixSIAR)
-mixsiar.dir <- find.package("MixSIAR")
-paste0(mixsiar.dir,"/example_scripts")
+## ---- eval=FALSE--------------------------------------------------------------
+#  library(MixSIAR)
+#  mixsiar.dir <- find.package("MixSIAR")
+#  paste0(mixsiar.dir,"/example_scripts")
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  source(paste0(mixsiar.dir,"/example_scripts/mixsiar_script_killerwhale.R"))
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 library(MixSIAR)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # Replace the system.file call with the path to your file
 mix.filename <- system.file("extdata", "killerwhale_consumer.csv", package = "MixSIAR")
 
@@ -20,7 +20,7 @@ mix <- load_mix_data(filename=mix.filename,
 					 fac_nested=NULL,
 					 cont_effects=NULL)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # Replace the system.file call with the path to your file
 source.filename <- system.file("extdata", "killerwhale_sources.csv", package = "MixSIAR")
 
@@ -30,17 +30,17 @@ source <- load_source_data(filename=source.filename,
 						   data_type="means",
 						   mix)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # Replace the system.file call with the path to your file
 discr.filename <- system.file("extdata", "killerwhale_discrimination.csv", package = "MixSIAR")
 
 discr <- load_discr_data(filename=discr.filename, mix)
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  # Make an isospace plot
 #  plot_data(filename="isospace_plot", plot_save_pdf=TRUE, plot_save_png=FALSE, mix,source,discr)
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  # Plot uninformative prior
 #  plot_prior(alpha.prior=1, source, filename = "prior_plot_kw_uninf")
 #  
@@ -51,13 +51,13 @@ discr <- load_discr_data(filename=discr.filename, mix)
 #  write_JAGS_model(model_filename, resid_err, process_err, mix, source)
 #  
 #  # Run the JAGS model ("very long" took ~5 min)
-#  jags.uninf <- run_model(run="test",mix,source,discr,model_filename,alpha.prior = 1, resid_err, process_err)
-#  # jags.uninf <- run_model(run="very long",mix,source,discr,model_filename,alpha.prior = 1, resid_err, process_err)
+#  jags.uninf <- run_model(run="test",mix,source,discr,model_filename)
+#  # jags.uninf <- run_model(run="very long",mix,source,discr,model_filename)
 #  
 #  # Process diagnostics, summary stats, and posterior plots
 #  output_JAGS(jags.uninf, mix, source)
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  # Our 14 fecal samples were 10, 1, 0, 0, 3
 #  kw.alpha <- c(10,1,0,0,3)
 #  
@@ -81,8 +81,8 @@ discr <- load_discr_data(filename=discr.filename, mix)
 #  write_JAGS_model(model_filename, resid_err, process_err, mix, source)
 #  
 #  # Run the JAGS model ("very long" took ~5 min)
-#  jags.inf <- run_model(run="test",mix,source,discr,model_filename,alpha.prior=kw.alpha, resid_err, process_err)
-#  # jags.inf <- run_model(run="very long",mix,source,discr,model_filename,alpha.prior=kw.alpha, resid_err, process_err)
+#  jags.inf <- run_model(run="test",mix,source,discr,model_filename,alpha.prior=kw.alpha)
+#  # jags.inf <- run_model(run="very long",mix,source,discr,model_filename,alpha.prior=kw.alpha)
 #  
 #  # Process diagnostics, summary stats, and posterior plots
 #  output_JAGS(jags.inf, mix, source)

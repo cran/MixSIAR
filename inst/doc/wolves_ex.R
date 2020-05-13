@@ -1,15 +1,15 @@
-## ------------------------------------------------------------------------
-library(MixSIAR)
-mixsiar.dir <- find.package("MixSIAR")
-paste0(mixsiar.dir,"/example_scripts")
+## ---- eval=FALSE--------------------------------------------------------------
+#  library(MixSIAR)
+#  mixsiar.dir <- find.package("MixSIAR")
+#  paste0(mixsiar.dir,"/example_scripts")
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  source(paste0(mixsiar.dir,"/example_scripts/mixsiar_script_wolves.R"))
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 library(MixSIAR)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # Replace the system.file call with the path to your file
 mix.filename <- system.file("extdata", "wolves_consumer.csv", package = "MixSIAR")
 
@@ -21,7 +21,7 @@ mix <- load_mix_data(filename=mix.filename,
                      fac_nested=c(FALSE,TRUE), 
                      cont_effects=NULL)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # Replace the system.file call with the path to your file
 source.filename <- system.file("extdata", "wolves_sources.csv", package = "MixSIAR")
 
@@ -32,44 +32,42 @@ source <- load_source_data(filename=source.filename,
                            data_type="means", 
                            mix)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # Replace the system.file call with the path to your file
 discr.filename <- system.file("extdata", "wolves_discrimination.csv", package = "MixSIAR")
 
 # Load the discrimination/TDF data
 discr <- load_discr_data(filename=discr.filename, mix)
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  # Make an isospace plot
 #  plot_data(filename="isospace_plot", plot_save_pdf=TRUE, plot_save_png=FALSE, mix,source,discr)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # Calculate the convex hull area, standardized by source variance
 calc_area(source=source,mix=mix,discr=discr)
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  # default "UNINFORMATIVE" / GENERALIST prior (alpha = 1)
 #  plot_prior(alpha.prior=1,source)
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  # Write the JAGS model file
 #  model_filename <- "MixSIAR_model.txt"   # Name of the JAGS model file
 #  resid_err <- TRUE
 #  process_err <- TRUE
 #  write_JAGS_model(model_filename, resid_err, process_err, mix, source)
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  run <- list(chainLength=200000, burn=150000, thin=50, chains=3, calcDIC=TRUE)
 
-## ---- eval=FALSE---------------------------------------------------------
-#  jags.1 <- run_model(run="test", mix, source, discr, model_filename,
-#                      alpha.prior = 1, resid_err, process_err)
+## ---- eval=FALSE--------------------------------------------------------------
+#  jags.1 <- run_model(run="test", mix, source, discr, model_filename)
 
-## ---- eval=FALSE---------------------------------------------------------
-#  jags.1 <- run_model(run="normal", mix, source, discr, model_filename,
-#                      # alpha.prior = 1, resid_err, process_err)
+## ---- eval=FALSE--------------------------------------------------------------
+#  jags.1 <- run_model(run="normal", mix, source, discr, model_filename)
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  output_options <- list(summary_save = TRUE,
 #                         summary_name = "summary_statistics",
 #                         sup_post = FALSE,
@@ -89,8 +87,9 @@ calc_area(source=source,mix=mix,discr=discr)
 #                         indiv_effect = FALSE,
 #                         plot_post_save_png = FALSE,
 #                         plot_pairs_save_png = FALSE,
-#                         plot_xy_save_png = FALSE)
+#                         plot_xy_save_png = FALSE,
+#                         diag_save_ggmcmc = FALSE)
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  output_JAGS(jags.1, mix, source, output_options)
 

@@ -135,7 +135,7 @@ for(mod in 1:n.mod){
   
   # Run the JAGS model
   # "short" MCMC length is plenty long for all models to converge
-  jags.mod[[mod]] <- run_model(run="short", mix[[mod]], source[[mod]], discr[[mod]], model_filename, alpha.prior=1, resid_err, process_err)
+  jags.mod[[mod]] <- run_model(run="short", mix[[mod]], source[[mod]], discr[[mod]], model_filename, alpha.prior=1)
   
   # Process diagnostics, summary stats, and posterior plots
   # output_JAGS(jags.mod[[mod]], mix[[mod]], source[[mod]])
@@ -159,7 +159,8 @@ for(mod in 1:n.mod){
                                                   indiv_effect = FALSE,                   # Is Individual a random effect in the model? (already specified)
                                                   plot_post_save_png = FALSE,             # Save posterior density plots as pngs?
                                                   plot_pairs_save_png = FALSE,            # Save pairs plot as png?
-                                                  plot_xy_save_png = FALSE))
+                                                  plot_xy_save_png = FALSE,
+                                                  diag_save_ggmcmc = FALSE))
   graphics.off()
   
   # Move back up to root directory
@@ -226,7 +227,16 @@ tmp.p.high <- array(data=NA,dim=c(n.plot, n.sources))              # dummy varia
 p.high <- array(data=NA,dim=c(n.plot, n.sources))
 eps.low <- rep(NA, n.plot)
 eps.med <- rep(NA, n.plot)
-eps.high <- rep(NA, n.plot)    
+eps.high <- rep(NA, n.plot) 
+
+# function to calculate specialization index from Newsome et al. 2012 (Eqn 5)
+calc_eps <- function(f){
+  n.sources <- length(f)
+  gam <- rep(1/n.sources,n.sources)
+  phi <- rep(0,n.sources)
+  phi[1] <- 1
+  sqrt(sum((f-gam)^2))/sqrt(sum((phi-gam)^2))
+}    
 for(i in 1:n.plot){
   for(j in 1:(n.sources-1)){
     cross.med[i,,j] <- (e[,j]^ilr.median[i,j])/sum(e[,j]^ilr.median[i,j]);
@@ -271,14 +281,6 @@ dev.off()
 
 ########################################################################
 # Plot specialization index vs. length from model 5
-calc_eps <- function(f){
-  n.sources <- length(f)
-  gam <- rep(1/n.sources,n.sources)
-  phi <- rep(0,n.sources)
-  phi[1] <- 1
-  sqrt(sum((f-gam)^2))/sqrt(sum((phi-gam)^2))
-} 
-
 df.eps <- data.frame(Length=Cont1.plot, med=eps.med, low=eps.low, high=eps.high)
 low.inc <- high.inc <- rep(NA,n.plot)
 for(i in 2:n.plot){

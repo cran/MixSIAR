@@ -4,8 +4,16 @@
 \alias{run_model}
 \title{Run the JAGS model}
 \usage{
-run_model(run, mix, source, discr, model_filename, alpha.prior = 1, resid_err,
-  process_err)
+run_model(
+  run,
+  mix,
+  source,
+  discr,
+  model_filename,
+  alpha.prior = 1,
+  resid_err = NULL,
+  process_err = NULL
+)
 }
 \arguments{
 \item{run}{list of MCMC parameters (chainLength, burn, thin, chains, calcDIC).
@@ -32,9 +40,9 @@ input to \code{\link{write_JAGS_model}}).}
 
 \item{alpha.prior}{Dirichlet prior on p.global (default = 1, uninformative)}
 
-\item{resid_err}{include residual error in the model?}
+\item{resid_err}{include residual error in the model? (no longer used, read from `model_filename`)}
 
-\item{process_err}{include process error in the model?}
+\item{process_err}{include process error in the model? (no longer used, read from `model_filename`)}
 }
 \value{
 jags.1, a \code{rjags} model object

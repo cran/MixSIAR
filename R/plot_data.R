@@ -30,9 +30,11 @@
 #' @param mix output from \code{\link{load_mix_data}}
 #' @param source output from \code{\link{load_source_data}}
 #' @param discr output from \code{\link{load_discr_data}}
+#' @param return_obj T/F, whether or not to return ggplot object for further modification, defaults to F
 #'
 #' @seealso \code{\link{plot_data_two_iso}}, \code{\link{plot_data_one_iso}}
-plot_data <- function(filename,plot_save_pdf,plot_save_png,mix,source,discr){
+#' @export
+plot_data <- function(filename,plot_save_pdf,plot_save_png,mix,source,discr, return_obj=FALSE){
   # check that discr rownames match source_names
   if(!identical(rownames(discr$mu),source$source_names)){
     stop(paste("*** Error: Source names do not match in source and discr
@@ -42,12 +44,29 @@ plot_data <- function(filename,plot_save_pdf,plot_save_png,mix,source,discr){
     data files. Please check your source and discr data file row names.",sep=""))}
 
   if(mix$n.iso==1){
-    plot_data_one_iso(mix,source,discr,filename,plot_save_pdf,plot_save_png)
+    plot_data_one_iso(mix,source,discr,filename,plot_save_pdf,plot_save_png,return_obj)
+    if(return_obj == TRUE) {
+      g = plot_data_one_iso(mix,source,discr,filename,plot_save_pdf,plot_save_png,return_obj=return_obj)
+    }
   } else {
     for(iso1 in 1:(mix$n.iso-1)){
       for(iso2 in (iso1+1):mix$n.iso){
-        plot_data_two_iso(c(iso1,iso2),mix,source,discr,filename,plot_save_pdf,plot_save_png)
+        plot_data_two_iso(isotopes=c(iso1,iso2),mix=mix,source=source,
+          discr=discr,
+          filename=filename,
+          plot_save_pdf=plot_save_pdf,
+          plot_save_png=plot_save_png,return_obj=return_obj)
+        if(return_obj == TRUE) {
+          g = plot_data_two_iso(isotopes=c(iso1,iso2),mix=mix,source=source,
+            discr=discr,
+            filename=filename,
+            plot_save_pdf=plot_save_pdf,
+            plot_save_png=plot_save_png,return_obj=return_obj)
+        }
       }
     }
+  }
+  if(return_obj == TRUE) {
+    return(g)
   }
 } # end plot_data function

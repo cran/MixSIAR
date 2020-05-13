@@ -24,6 +24,7 @@
 #' @param process_err T/F: include process error in the model?
 #' @param mix output from \code{\link{load_mix_data}}
 #' @param source output from \code{\link{load_source_data}}
+#' @export
 write_JAGS_model <- function(filename = "MixSIAR_model.txt", resid_err = TRUE, process_err = TRUE, mix, source){
 if(!process_err && !resid_err){
   stop(paste("Invalid error structure, must choose one of:
@@ -775,10 +776,5 @@ cat("
 
 ", file=filename, append=T)
 } # end MixSIR error section (N = 1)
-
-# Assign "resid_err" and "process_err" to the mixsiar environment, so they are
-#  accessible by "run_model" function without a user having to re-specify (and match!)
-assign("resid_err", resid_err, envir = mixsiar)
-assign("process_err", process_err, envir = mixsiar)
 
 } # end function write_JAGS_model

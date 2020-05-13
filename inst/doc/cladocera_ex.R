@@ -1,15 +1,15 @@
-## ------------------------------------------------------------------------
-library(MixSIAR)
-mixsiar.dir <- find.package("MixSIAR")
-paste0(mixsiar.dir,"/example_scripts")
+## ---- eval=FALSE--------------------------------------------------------------
+#  library(MixSIAR)
+#  mixsiar.dir <- find.package("MixSIAR")
+#  paste0(mixsiar.dir,"/example_scripts")
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  source(paste0(mixsiar.dir,"/example_scripts/mixsiar_script_cladocera.R"))
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 library(MixSIAR)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # Replace the system.file call with the path to your file
 mix.filename <- system.file("extdata", "cladocera_consumer.csv", package = "MixSIAR")
 
@@ -24,7 +24,7 @@ mix <- load_mix_data(filename=mix.filename,
 					 fac_nested=FALSE,
 					 cont_effects=NULL)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # Replace the system.file call with the path to your file
 source.filename <- system.file("extdata", "cladocera_sources.csv", package = "MixSIAR")
 
@@ -34,31 +34,29 @@ source <- load_source_data(filename=source.filename,
 						   data_type="means",
 						   mix)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # Replace the system.file call with the path to your file
 discr.filename <- system.file("extdata", "cladocera_discrimination.csv", package = "MixSIAR")
 
 discr <- load_discr_data(filename=discr.filename, mix)
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  # default "UNINFORMATIVE" / GENERALIST prior (alpha = 1)
 #  plot_prior(alpha.prior=1,source)
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  # Write the JAGS model file
 #  model_filename <- "MixSIAR_model.txt"
 #  resid_err <- FALSE
 #  process_err <- TRUE
 #  write_JAGS_model(model_filename, resid_err, process_err, mix, source)
 
-## ---- eval=FALSE---------------------------------------------------------
-#  jags.1 <- run_model(run="test", mix, source, discr, model_filename,
-#                      alpha.prior = 1, resid_err, process_err)
+## ---- eval=FALSE--------------------------------------------------------------
+#  jags.1 <- run_model(run="test", mix, source, discr, model_filename)
 
-## ---- eval=FALSE---------------------------------------------------------
-#  jags.1 <- run_model(run="normal", mix, source, discr, model_filename,
-#                      alpha.prior = 1, resid_err, process_err)
+## ---- eval=FALSE--------------------------------------------------------------
+#  jags.1 <- run_model(run="normal", mix, source, discr, model_filename)
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  output_JAGS(jags.1, mix, source, output_options)
 
