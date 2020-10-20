@@ -1,7 +1,7 @@
 MixSIAR
 =============
-[![cran version](http://www.r-pkg.org/badges/version/MixSIAR)](https://cran.r-project.org/package=MixSIAR)
-[![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/grand-total/MixSIAR?)](https://github.com/metacran/cranlogs.app)
+[![cran version](https://www.r-pkg.org/badges/version/MixSIAR)](https://cran.r-project.org/package=MixSIAR)
+[![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/grand-total/MixSIAR?)](https://github.com/r-hub/cranlogs.app)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1209993.svg)](https://doi.org/10.5281/zenodo.1209993)
 
 MixSIAR is an R package that helps you create and run Bayesian mixing models to analyze biotracer data (i.e. stable isotopes, fatty acids), following the [MixSIAR model framework](https://peerj.com/articles/5096/). MixSIAR represents a collaborative coding project between the investigators behind MixSIR, SIAR, and IsoSource: Brice Semmens, Brian Stock, Eric Ward, Andrew Parnell, Donald Phillips, and Andrew Jackson.
@@ -28,7 +28,7 @@ For details, please see the [MixSIAR paper](https://peerj.com/articles/5096/):
 
 ## Installation
 
-The GUI has been removed from the CRAN version of MixSIAR (if desired, see MixSIARgui). Running MixSIAR with scripts is easier to install and better for repeated analysis.
+The GUI has been removed from the CRAN version of MixSIAR (if desired, see [MixSIARgui](https://github.com/brianstock/MixSIARgui) on GitHub). Running MixSIAR with scripts is easier to install and better for repeated analysis.
 
 1. Download and install/update [R](https://cran.r-project.org/).
 
@@ -38,6 +38,11 @@ The GUI has been removed from the CRAN version of MixSIAR (if desired, see MixSI
 ```
 install.packages("MixSIAR", dependencies=TRUE)
 library(MixSIAR)
+```
+
+If you want the latest changes and bug fixes not yet on CRAN, you can install the GitHub version:
+```
+remotes::install_github("brianstock/MixSIAR", dependencies=T)
 ```
 
 ## Tutorial
